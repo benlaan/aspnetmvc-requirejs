@@ -5,7 +5,7 @@
 
         init: function () {
 
-            logging.write("Init...");
+            logging.write("What do you need to do on *every* page via javascript? - hopefully nothing!");
         }
     });
 
