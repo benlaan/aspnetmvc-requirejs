@@ -7,6 +7,13 @@ namespace Laan.Mvc.RequireJs.Extensions
 {
     public static class HtmlHelperExtensions
     {
+        private static string _ticks;
+
+        static HtmlHelperExtensions()
+        {
+            _ticks = DateTime.Now.Ticks.ToString();
+        }
+
         public static MvcHtmlString StartJs(this HtmlHelper helper)
         {
             var controller = helper.ViewContext.RouteData.Values["Controller"].ToString();
@@ -21,7 +28,7 @@ namespace Laan.Mvc.RequireJs.Extensions
         {
             string version;
 #if DEBUG
-            version = DateTime.Now.Ticks.ToString();
+            version = _ticks;
 #else
             version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 #endif

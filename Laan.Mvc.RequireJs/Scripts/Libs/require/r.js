@@ -3836,11 +3836,11 @@ define('rhino/file', ['prim'], function (prim) {
                         }
 
                         if (ok && (!file.exclusionRegExp ||
-                            !file.exclusionRegExp.test(fileObj.getName()))) {
+                            !file.exclusionRegExp.test(fileObj.getTitle()))) {
                             files.push(filePath);
                         }
                     } else if (fileObj.isDirectory() &&
-                              (!file.exclusionRegExp || !file.exclusionRegExp.test(fileObj.getName()))) {
+                              (!file.exclusionRegExp || !file.exclusionRegExp.test(fileObj.getTitle()))) {
                         dirFiles = this.getFilteredFileList(fileObj, regExpFilters, makeUnixPaths, true);
                         files.push.apply(files, dirFiles);
                     }
@@ -24448,7 +24448,7 @@ define('rhino/optimize', ['logger', 'env!env/file'], function (logger, file) {
 
             logger.trace("Minifying file: " + fileName);
 
-            baseName = (new java.io.File(fileName)).getName();
+            baseName = (new java.io.File(fileName)).getTitle();
 
             //Set up options
             options = new jscomp.CompilerOptions();
@@ -24485,7 +24485,7 @@ define('rhino/optimize', ['logger', 'env!env/file'], function (logger, file) {
                 optimized = String(compiler.toSource());
 
                 if (config.generateSourceMaps && result.sourceMap && outFileName) {
-                    outBaseName = (new java.io.File(outFileName)).getName();
+                    outBaseName = (new java.io.File(outFileName)).getTitle();
 
                     srcOutFileName = outFileName + ".src.js";
                     outFileNameMap = outFileName + ".map";

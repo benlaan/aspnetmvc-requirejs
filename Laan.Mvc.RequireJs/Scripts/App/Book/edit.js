@@ -1,38 +1,84 @@
-﻿define(["moment", "underscore", "logging", "widget"], function (moment, _, log, widget) {
+﻿define(["moment", "underscore", "logging", "widget", "string"], function (moment, _, log, widget) {
 
-    function Book()
-    {
-        this._name;
+    function Book() {
 
-        // register the selector for each 'field', once
-        this.init = function () {
-            _name = _.memoise(widget.select("name"), "book_name");
-        }
+        // fields
+        this._title = null;
+        this._publishDate = null;
+        this._author = null;
 
-        this.getName = function () {
-            return _name.val()
+        // instance reference
+        var self = this;
+
+        this.getSelector = function (fieldName) {
+
+            return "input[name='" + fieldName + "']";
         };
 
-        this.setName = function (value) {
-            _name.val(value);
-        }
+        this.registerProperty = function (fieldName) {
 
-        // 'business rules are all here!
-        this.changed = function (field, value) {
+            var selector = self.getSelector(fieldName);
+            var selectorField = "_" + fieldName.toJavaCase();
+            self[selectorField] = widget.select(selector);
 
-            if (field == "publishDate") {
-                if (new moment(value) > moment.now)
-                    return false;
+            self["get" + fieldName] = function () {
+
+                var value = self[selectorField].val();
+                log.write(["get" + fieldName, "=>", value]);
+                return value;
             };
 
-            return true;
+            self["set" + fieldName] = function (value) {
+
+                log.write(["set" + fieldName, "<=", value]);
+                self[selectorField].val(value);
+            };
+
+            widget.onchange(selector, function (value) {
+
+                log.write(["onChange", selector]);
+                self.update(fieldName, self["get" + fieldName]());
+            });
+        };
+
+        // 'business rules are all here!
+        this.update = function (field, value) {
+
+            log.write(field, value);
+
+            switch (field) {
+
+                case "PublishDate":
+                    if (new moment(value) > moment(Date.now)) {
+
+                        log.write("invalid change to publish date!");
+                        return;
+                    }
+
+                    break;
+
+                case "Title":
+                    if (value === "") {
+
+                        log.write("invalid title - can't be blank");
+                        return;
+                    }
+
+                    break;
+            }
         }
 
-        return {
+        this.print = function () {
 
-            getName: this.getName,
-            setName: this.setName,
-            changed: this.changed
+            alert("Printing " + self.getTitle());
+
+        };
+
+        // register the selector for each field (prefixed with an underscore)
+        for (var property in self) {
+
+            if (this.hasOwnProperty(property) && property[0] == "_")
+                self.registerProperty(property.slice(1).toCamelCase());
         }
     }
 
@@ -40,11 +86,17 @@
 
         log.write("Book.Edit");
 
-        widget.datepicker();
-
+        // initialise model
         var book = new Book();
 
-        widget.onchange("publishDate", function (v) { book.changed("publishDate", v); });
+        // initialise widgets
+        widget.datepicker();
+        widget.button("print", book);
+
+        // custom business rules..
+        var title = book.getTitle();
+        var publishDate = book.getPublishDate();
+        var author = book.getAuthor();
 
     };
 });

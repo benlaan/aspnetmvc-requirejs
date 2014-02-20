@@ -12,8 +12,10 @@
         "knockout": "Libs/knockout/knockout-3.0.0",
 
         // common libs only - don't add everything.. just the well-used libs
-        "logging": "App/Common/logging",
-        "http": "App/Common/http"
+        "logging": "App/_Utils/logging",
+        "http": "App/_Utils/http",
+        "string": "App/_Utils/string",
+        "widget": "App/_Utils/widget"
     },
 
     shim: {

@@ -105,14 +105,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\App\Common\widget.js" />
-    <Content Include="Scripts\App\Common\http.js" />
+    <Content Include="Scripts\App\_Utils\string.js" />
+    <Content Include="Scripts\App\_Utils\widget.js" />
+    <Content Include="Scripts\App\_Utils\http.js" />
     <Content Include="Scripts\App\Book\edit.js" />
     <Content Include="Scripts\App\Book\index.js" />
     <Content Include="Scripts\App\Home\about.js" />
     <Content Include="Scripts\App\Home\index.js" />
     <Content Include="Scripts\App\app.js" />
-    <Content Include="Scripts\App\Common\logging.js" />
+    <Content Include="Scripts\App\_Utils\logging.js" />
     <Content Include="Scripts\App\bootstrapper.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

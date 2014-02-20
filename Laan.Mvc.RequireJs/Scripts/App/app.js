@@ -1,4 +1,4 @@
-﻿define(["underscore", "App/Common/Logging"], function (_, logging) {
+﻿define(["underscore", "logging"], function (_, logging) {
     var App = function () { };
 
     _.extend(App.prototype, {
