@@ -1,0 +1,31 @@
+﻿@model Laan.Mvc.RequireJs.Models.Book
+
+<form action="/Book/Submit" method="post">
+    <table>
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>@Html.EditorFor(b => b.Id)</td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td>@Html.EditorFor(b => b.Title)</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>@Html.EditorFor(b => b.Author)</td>
+            </tr>
+            <tr>
+                <td>Published</td>
+                <td>
+                    <input class="text-box single-line date"
+                           name="PublishDate"
+                           value="@Model.PublishDate" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" name="Save">Save</button>
+    <button type="submit" name="Cancel">Cancel</button>
+</form>

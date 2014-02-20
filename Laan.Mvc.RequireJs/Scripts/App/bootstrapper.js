@@ -6,6 +6,7 @@
 
     paths: {
         "jquery": "Libs/jquery/jquery-1.7.1.min",
+        "jquery-ui": "Libs/jquery/jquery-ui-1.8.20.min",
         "underscore": "Libs/Underscore/underscore.min",
         "moment": "Libs/moment/moment.min",
         "knockout": "Libs/knockout/knockout-3.0.0",
