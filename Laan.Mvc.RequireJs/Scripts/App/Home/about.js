@@ -8,7 +8,7 @@
 
     return new function () {
 
-        log.write("Home.About!");
+        log.debug("Home.About!");
 
         ko.applyBindings(new Person());
 

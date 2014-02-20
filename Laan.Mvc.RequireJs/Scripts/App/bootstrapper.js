@@ -15,6 +15,7 @@
         "logging": "App/_Utils/logging",
         "http": "App/_Utils/http",
         "string": "App/_Utils/string",
+        "entity": "App/_Utils/entity",
         "widget": "App/_Utils/widget"
     },
 

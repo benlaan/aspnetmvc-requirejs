@@ -1,11 +1,12 @@
-﻿define(["underscore", "logging"], function (_, logging) {
+﻿define(["underscore", "logging"], function (_, log) {
+
     var App = function () { };
 
     _.extend(App.prototype, {
 
         init: function () {
 
-            logging.write("What do you need to do on *every* page via javascript? - hopefully nothing!");
+            log.debug("App.Init");
         }
     });
 

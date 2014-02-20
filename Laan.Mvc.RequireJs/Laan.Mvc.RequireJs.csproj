@@ -105,6 +105,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\App\_Utils\entity.js" />
     <Content Include="Scripts\App\_Utils\string.js" />
     <Content Include="Scripts\App\_Utils\widget.js" />
     <Content Include="Scripts\App\_Utils\http.js" />

@@ -4,7 +4,7 @@
 
         this.enabled = true;
 
-        this.write = function (message) {
+        var write = function (message) {
 
             if (this.enabled) {
 
@@ -13,6 +13,18 @@
 
                 console.log(_.head(message), _.tail(message).join(" "));
             }
+        };
+
+        this.debug = function (message) {
+
+            if (this.enabled) {
+                write(message);
+            }
+        };
+
+        this.error = function (message) {
+
+            write(_.flatten([["ERROR"], message]));
         }
     };
 

@@ -24473,7 +24473,7 @@ define('rhino/optimize', ['logger', 'env!env/file'], function (logger, file) {
             }
 
             //Trigger the compiler
-            Compiler.setLoggingLevel(Packages.java.util.logging.Level[config.loggingLevel || 'WARNING']);
+            Compiler.setLoggingLevel(Packages.java.util.log.Level[config.loggingLevel || 'WARNING']);
             compiler = new Compiler();
 
             //fill the sourceArrrayList; we need the ArrayList because the only overload of compile

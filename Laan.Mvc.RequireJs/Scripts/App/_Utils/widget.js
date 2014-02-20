@@ -20,14 +20,6 @@
                 entity[selector](arguments);
             });
         };
-
-        this.onchange = function (fieldName, callback) {
-
-            this.select(fieldName).change(function () {
-
-                callback(fieldName);
-            });
-        };
     };
 
     return new Http();

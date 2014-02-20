@@ -2,7 +2,7 @@
 
     return new function () {
 
-        log.write("Book.Index!");
+        log.debug("Book.Index!");
 
     };
 });
