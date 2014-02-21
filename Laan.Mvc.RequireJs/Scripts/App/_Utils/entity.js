@@ -6,14 +6,25 @@
 
     _.extend(Entity.prototype, {
 
+        fields: null,
+        rootSelector: null,
+
+        getSelector : function(selector)
+        {
+            if (this.rootSelector) 
+                return $(this.rootSelector).find(selector);
+            
+            return $(selector);
+        },
+        
         registerProperty: function (fieldName) {
 
             var self = this;
-            var selector = "input[name='" + fieldName + "']";
+            var selector = ":input[name='" + fieldName + "']";
             var selectorField = "_" + fieldName.toJavaCase();
 
             // store the selector
-            this[selectorField] = $(selector);
+            this[selectorField] = this.getSelector(selector);
 
             // define a setter
             this["get" + fieldName] = function () {
@@ -34,13 +45,32 @@
             $(selector).change(function (value) {
 
                 log.debug(["onChange", selector]);
-                self.update(fieldName, self["get" + fieldName]());
+                if (self.update)
+                    self.update(fieldName, self["get" + fieldName]());
             });
         },
 
-        initialise: function () {
+        findFields: function() {
+    
+            var allfieldInputs = this
+                .getSelector(":input")
+                .not(':input[type=button], :input[type=submit], :input[type=reset]');
+
+            return _
+                .map(allfieldInputs, function (s) { return s.name; })
+                .filter(function (s) { return s != ""; });
+        },
+
+        initialise: function (selector) {
 
             var entity = this;
+            if(selector)
+                entity.rootSelector = $(selector);
+
+            if (this.fields != null)
+                entity.fields = this.fields;
+            else
+                entity.fields = this.findFields();
 
             // register the selector for each field (prefixed with an underscore)
             _.each(this.fields, function (property) {
@@ -52,11 +82,11 @@
 
     return {
 
-        createDescendantOf: function (DescendantType) {
+        createDescendantFor: function (DescendantType, selector) {
 
             var descendant = _.extend(DescendantType.prototype, Entity.prototype);
             descendant.self = descendant;
-            descendant.initialise();
+            descendant.initialise(selector);
             return descendant;
         }
     };

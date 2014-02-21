@@ -4,8 +4,6 @@
 
     _.extend(Book.prototype, {
 
-        fields: ["title", "publishDate", "author"],
-
         update: function (field, value) {
 
             log.debug(field, value);
@@ -41,7 +39,7 @@
         log.debug("Book.Edit");
 
         // initialise model
-        var book = entity.createDescendantOf(Book);
+        var book = entity.createDescendantFor(Book, "form.book");
 
         // initialise widgets
         widget.datepicker();
