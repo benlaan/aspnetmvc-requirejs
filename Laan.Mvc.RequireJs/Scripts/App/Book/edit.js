@@ -6,8 +6,6 @@
 
         update: function (field, value) {
 
-            log.debug(field, value);
-
             switch (field) {
 
                 case "PublishDate":
@@ -30,13 +28,15 @@
 
         print: function () {
 
-            alert("Printing " + this.getTitle());
+            alert("Printing " + this.Title());
         }
     });
 
     return new function () {
 
-        log.debug("Book.Edit");
+        log.info("Book.Edit");
+
+        log.debugEnabled = true;
 
         // initialise model
         var book = entity.createDescendantFor(Book, "form.book");
@@ -45,10 +45,16 @@
         widget.datepicker();
         widget.button("print", book);
 
-        // appply custom business rules to the entity itself
-        var title = book.getTitle();
-        var publishDate = book.getPublishDate();
-        var author = book.getAuthor();
+        // apply custom business rules to the entity itself
+        var title = book.Title();
+        var publishDate = book.PublishDate();
+        var author = book.Author();
+
+        // wait a while then change the title..
+        _.delay(
+            function () { book.Title(title.toUpperCase()); },
+            2000
+        );
 
     };
 });

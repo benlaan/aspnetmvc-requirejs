@@ -1,10 +1,11 @@
 ﻿define(["jquery", "jquery-ui"], function ($) {
 
-    var Http = function () {
+    var Widget = function () {
 
         this.datepicker = function (selector) {
 
-            $(selector || "input.date").datepicker();
+            $(selector || "input[type='datetime'], input[type='date']")
+                .datepicker({ dateFormat: 'dd/mm/yy' });
         };
 
         this.select = function (selector) {

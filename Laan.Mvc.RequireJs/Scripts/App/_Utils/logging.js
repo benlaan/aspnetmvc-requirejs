@@ -2,29 +2,33 @@
 
     var Logging = function () {
 
-        this.enabled = true;
+        this.infoEnabled = true;
+        this.debugEnabled = false;
 
-        var write = function (message) {
+        var write = function (enabled, message) {
 
-            if (this.enabled) {
+            if (!enabled)
+                return;
 
-                if (!_.isArray(message))
-                    message = [message];
+            if (!_.isArray(message))
+                message = [message];
 
-                console.log(_.head(message), _.tail(message).join(" "));
-            }
+            console.log(_.head(message), _.tail(message).join(" "));
+        };
+
+        this.info = function (message) {
+
+            write(this.infoEnabled, message);
         };
 
         this.debug = function (message) {
 
-            if (this.enabled) {
-                write(message);
-            }
+            write(this.debugEnabled, message);
         };
 
         this.error = function (message) {
 
-            write(_.flatten([["ERROR"], message]));
+            write(true, _.flatten([["ERROR"], message]));
         }
     };
 

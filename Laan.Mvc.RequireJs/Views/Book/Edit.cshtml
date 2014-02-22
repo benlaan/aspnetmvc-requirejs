@@ -18,9 +18,11 @@
             <tr>
                 <td>Published</td>
                 <td>
-                    <input class="text-box single-line date"
-                           name="PublishDate"
-                           value="@Model.PublishDate" />
+                    <input 
+                        type="datetime" 
+                        name="PublishDate" 
+                        value="@Model.PublishDate.ToShortDateString()" 
+                    />
                 </td>
             </tr>
         </tbody>

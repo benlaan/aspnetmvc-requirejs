@@ -9,8 +9,8 @@
         fields: null,
         rootSelector: null,
 
-        getSelector : function(selector)
-        {
+        getSelector: function (selector) {
+
             if (this.rootSelector) 
                 return $(this.rootSelector).find(selector);
             
@@ -27,46 +27,56 @@
             this[selectorField] = this.getSelector(selector);
 
             // define a setter
-            this["get" + fieldName] = function () {
+            this[fieldName] = function () {
 
-                var value = self[selectorField].val();
-                log.debug(["get" + fieldName, "=>", value]);
-                return value;
-            };
+                if (arguments != null && arguments.length > 0) {
 
-            // define a getter
-            this["set" + fieldName] = function (value) {
+                    self[selectorField].val(arguments[0]);
+                    log.debug(["set" + fieldName, "<=", arguments[0]]);
+                }
+                else {
 
-                log.debug(["set" + fieldName, "<=", value]);
-                self[selectorField].val(value);
+                    var value = self[selectorField].val();
+                    log.debug(["get" + fieldName, "=>", value]);
+
+                    return value;
+                }
             };
 
             // hook the change event to the 'update' method
-            $(selector).change(function (value) {
+            $(selector).change(function (event) {
 
-                log.debug(["onChange", selector]);
-                if (self.update)
-                    self.update(fieldName, self["get" + fieldName]());
+                log.debug(["change", selector]);
+
+                if (self.update) {
+
+                    var value = self[fieldName]();
+                    log.debug(field + " changed", value);
+                    self.update(fieldName, value);
+                }
             });
         },
 
         findFields: function() {
     
-            var allfieldInputs = this
+            var inputs = this
                 .getSelector(":input")
                 .not(':input[type=button], :input[type=submit], :input[type=reset]');
 
-            return _
-                .map(allfieldInputs, function (s) { return s.name; })
+            return _(inputs)
+                .map(function (s) { return s.name; })
                 .filter(function (s) { return s != ""; });
         },
 
         initialise: function (selector) {
 
             var entity = this;
+
             if(selector)
                 entity.rootSelector = $(selector);
 
+            // if there is a fields property, then use it, otherwise find them 
+            // within the root selector
             if (this.fields != null)
                 entity.fields = this.fields;
             else
@@ -85,7 +95,6 @@
         createDescendantFor: function (DescendantType, selector) {
 
             var descendant = _.extend(DescendantType.prototype, Entity.prototype);
-            descendant.self = descendant;
             descendant.initialise(selector);
             return descendant;
         }
