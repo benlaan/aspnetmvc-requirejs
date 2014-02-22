@@ -23,5 +23,5 @@
         };
     };
 
-    return new Http();
+    return new Widget();
 });
