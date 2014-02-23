@@ -45,6 +45,7 @@ require(["qunit", "underscore"], function(qunit, _){
         require(["Tests/" + m]);
     });
 
+    qunit.config.reorder = false;
     qunit.load();
     qunit.start();
 });

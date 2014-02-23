@@ -23,7 +23,7 @@
         }
     });
 
-    // define helpful extension method for testing
+    // define a helpful extension method for testing
     _.extend(Book.prototype, {
 
         getPropertyCount: function () {
@@ -98,6 +98,26 @@
         assert.equal(book.Title(), "A Book Title");
         assert.equal(alertMessages.length, 1);
         assert.equal(alertMessages[0], "invalid title - can't be blank");
+    });
+
+    qunit.test("Setting publish date to a future date does not change the value, but triggers an alert", function () {
+
+        var alertMessages = [];
+        window.alert = function (message) {
+
+            alertMessages.push(message);
+        };
+
+        // Arrange
+        var book = new Book("form.book");
+
+        // Act
+        book.PublishDate("22/11/2050");
+
+        // Assert
+        assert.equal(book.PublishDate(), "");
+        assert.equal(alertMessages.length, 1);
+        assert.equal(alertMessages[0], "cannot publish in the future");
     });
 
 });

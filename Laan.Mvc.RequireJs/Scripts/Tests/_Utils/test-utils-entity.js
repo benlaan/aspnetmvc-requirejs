@@ -64,7 +64,7 @@
 
         // Arrange - adds 'fields' property to the book entity
         var Book = function () { };
-        _.extend(Book.prototype, { fields : [ "title" ] });
+        _.extend(Book.prototype, { fields: ["title"] });
 
         // Act
         var book = entity.createDescendantFor(Book, "form.book");
@@ -72,5 +72,59 @@
         // Assert
         assert.equal(getPropertyCount(book), 1);
         assert.equal(book.Title(), "A Book To Remember");
+    });
+
+    qunit.test("Dirty checks returns false for newly created entity", function () {
+
+        var Book = function () { };
+
+        // Act
+        var book = entity.createDescendantFor(Book, "form.book");
+
+        // Assert
+        assert.equal(book.isDirty, false);
+    });
+
+    qunit.test("Dirty checks returns true for entity with modified field", function () {
+
+        // Arrange
+        var Book = function () { };
+        var book = entity.createDescendantFor(Book, "form.book");
+
+        // Act
+        book.Title("Changed");
+
+        // Assert
+        assert.equal(book.isDirty, true);
+    });
+
+    qunit.test("Dirty checks returns false for entity with modified and reverted field", function () {
+
+        // Arrange
+        var Book = function () { };
+        var book = entity.createDescendantFor(Book, "form.book");
+
+        // Act
+        book.Title("Changed");
+        book.Title("A Book To Remember");
+
+        // Assert
+        assert.equal(book.isDirty, false);
+    });
+
+    qunit.test("Dirty checks returns false for entity with modification reverted due to a failed update", function () {
+
+        // Arrange
+        var Book = function () { };
+        var book = entity.createDescendantFor(Book, "form.book");
+        book.update = function () {
+            return false;
+        };
+
+        // Act
+        book.Title("Changed");
+
+        // Assert
+        assert.equal(book.isDirty, false);
     });
 });

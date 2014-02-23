@@ -1,10 +1,12 @@
-﻿define(["moment", "underscore", "logging", "entity"], function (moment, _, log, entity) {
+﻿define(["moment", "underscore", "logging", "entity", "jquery"], function (moment, _, log, entity, $) {
 
+    // define the constructor function
     var Book = function (selector) {
 
         return entity.createDescendantFor(Book, selector || "form.book");
     }
 
+    // add descendants members to the type
     _.extend(Book.prototype, {
 
         update: function (field, value) {
@@ -12,9 +14,9 @@
             switch (field) {
 
                 case "PublishDate":
-                    if (new moment(value) > moment(Date.now)) {
+                    if (moment(value, "DD/MM/YYYY") > moment()) {
 
-                        alert("invalid change to publish date!");
+                        alert("cannot publish in the future");
                         return false;
                     }
                     break;
