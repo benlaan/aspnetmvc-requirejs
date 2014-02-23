@@ -6,7 +6,6 @@
 
     _.extend(Entity.prototype, {
 
-        fields: null,
         rootSelector: null,
 
         getSelector: function (selector) {
@@ -24,24 +23,32 @@
             var selectorField = "_" + fieldName.toJavaCase();
 
             // store the selector
-            this[selectorField] = this.getSelector(selector);
+            var field = this.getSelector(selector);
+            this[selectorField] = field;
 
             // define a setter
             this[fieldName] = function () {
 
+                if (!field) 
+                    return undefined;
+
                 if (arguments != null && arguments.length > 0) {
 
-                    self[selectorField].val(arguments[0]);
+                    field.val(arguments[0]).change();
                     log.debug(["set" + fieldName, "<=", arguments[0]]);
                 }
                 else {
 
-                    var value = self[selectorField].val();
+                    var value = field.val();
                     log.debug(["get" + fieldName, "=>", value]);
 
                     return value;
                 }
             };
+
+            var initialValue = field.val();
+            field.data('initial-value', initialValue);
+            field.data('last-value', initialValue);
 
             // hook the change event to the 'update' method
             $(selector).change(function (event) {
@@ -51,8 +58,12 @@
                 if (self.update) {
 
                     var value = self[fieldName]();
-                    log.debug(field + " changed", value);
-                    self.update(fieldName, value);
+                    log.debug(fieldName + " changed", value);
+
+                    if(self.update(fieldName, value))
+                        field.data('last-value', field.val());
+                    else
+                        field.val(field.data('last-value'))
                 }
             });
         },
@@ -77,7 +88,7 @@
 
             // if there is a fields property, then use it, otherwise find them 
             // within the root selector
-            if (this.fields != null)
+            if (this.fields != undefined)
                 entity.fields = this.fields;
             else
                 entity.fields = this.findFields();

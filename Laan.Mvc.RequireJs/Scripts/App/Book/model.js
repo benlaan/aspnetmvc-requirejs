@@ -1,6 +1,9 @@
-﻿define(["moment", "underscore", "logging", "widget", "book/model"], function (moment, _, log, widget, Book) {
+﻿define(["moment", "underscore", "logging", "entity"], function (moment, _, log, entity) {
 
-    var Book = function () { };
+    var Book = function (selector) {
+
+        return entity.createDescendantFor(Book, selector || "form.book");
+    }
 
     _.extend(Book.prototype, {
 
@@ -12,7 +15,7 @@
                     if (new moment(value) > moment(Date.now)) {
 
                         alert("invalid change to publish date!");
-                        return;
+                        return false;
                     }
                     break;
 
@@ -20,10 +23,12 @@
                     if (value === "") {
 
                         alert("invalid title - can't be blank");
-                        return;
+                        return false;
                     }
                     break;
             }
+
+            return true;
         },
 
         print: function () {
@@ -32,16 +37,5 @@
         }
     });
 
-    return new function () {
-
-        log.info("Book.Edit");
-        log.debugEnabled = true;
-
-        // initialise model
-        var book = new Book("form.book");
-
-        // initialise widgets
-        widget.datepicker();
-        widget.button("print", book);
-    }
+    return Book
 });
