@@ -1,10 +1,10 @@
-var version = Date.now();
+var version = new Date();
 
 require.config({
 
     baseUrl: "../",
 
-    //urlArgs: "version=" + version,
+    urlArgs: "version=" + version,
 
     paths: {
         "jquery": "Libs/jquery/jquery-1.7.1.min",
@@ -36,7 +36,9 @@ require.config({
 require(["qunit", "underscore"], function(qunit, _){
 
     var tests = [
+        "_Utils/test-utils-string",
         "_Utils/test-utils-entity",
+        "_Utils/test-utils-entity-with-lists",
         "Book/test-book-model"
     ];
 

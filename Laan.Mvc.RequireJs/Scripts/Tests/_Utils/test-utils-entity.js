@@ -24,7 +24,7 @@
         }
     });
 
-    getPropertyCount = function (entity) {
+    var getPropertyCount = function (entity) {
 
         return _(Object.keys(entity))
             .filter(function (p) { return p[0] == '_'; })

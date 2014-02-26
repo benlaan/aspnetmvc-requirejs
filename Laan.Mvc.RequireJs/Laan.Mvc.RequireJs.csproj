@@ -197,6 +197,8 @@
     <Content Include="Scripts\Libs\moment\moment.min.js" />
     <Content Include="Scripts\Tests\test-main.js" />
     <Content Include="Scripts\Tests\tests.html" />
+    <Content Include="Scripts\Tests\_Utils\test-utils-string.js" />
+    <Content Include="Scripts\Tests\_Utils\test-utils-entity-with-lists.js" />
     <Content Include="Scripts\Tests\_Utils\test-utils-entity.js" />
     <Content Include="Scripts\Tests\Book\test-book-model.js" />
     <Content Include="Web.config" />
