@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -33,6 +34,12 @@ namespace Laan.Mvc.RequireJs
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            GlobalConfiguration.Configuration.Routes.MapHttpRoute(
+                "API Default",
+                "api/{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);

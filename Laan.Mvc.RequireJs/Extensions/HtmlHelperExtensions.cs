@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Laan.Mvc.RequireJs.Extensions
@@ -19,9 +21,16 @@ namespace Laan.Mvc.RequireJs.Extensions
             var controller = helper.ViewContext.RouteData.Values["Controller"].ToString();
             var action = helper.ViewContext.RouteData.Values["Action"].ToString();
 
-            var html = String.Format("App/{0}/{1}", controller, action);
+            var path = HttpContext.Current.Server.MapPath(String.Format(@"~\Scripts\App\{0}\{1}.js", controller, action));
 
-            return new MvcHtmlString(html);
+            if (File.Exists(path))
+            {
+                var html = String.Format("App/{0}/{1}", controller, action);
+
+                return new MvcHtmlString(html);
+            }
+
+            return null;
         }
 
         public static MvcHtmlString GetVersion(this HtmlHelper helper)

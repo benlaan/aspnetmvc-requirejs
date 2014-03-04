@@ -21,20 +21,22 @@
             <nav>
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("People", "Index", "Person")</li>
                     <li>@Html.ActionLink("Books", "Index", "Book")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
             </nav>
         </header>
         <section id="main">
             @RenderBody()
         </section>
-        <footer>
-        </footer>
+        <footer></footer>
     </div>
+@{var startJs = Html.StartJs();}
+@if(startJs != null) {
     <script type="text/javascript">
         document.__applicationVersion = '@Html.GetVersion()';
     </script>
-    <script data-main="/Scripts/App/app-main" data-start="@Html.StartJs()" src="/Scripts/Libs/Require/require.js"></script>
+    <script data-main="/Scripts/App/app-main" data-start="@startJs" src="/Scripts/Libs/Require/require.js"></script>
+}
 </body>
 </html>

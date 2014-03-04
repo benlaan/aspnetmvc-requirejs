@@ -4,8 +4,10 @@
 
         this.datepicker = function (selector) {
 
+            $.datepicker.setDefaults({ dateFormat: "yy-mm-dd" });
+
             $(selector || "input[type='datetime'], input[type='date']")
-                .datepicker({ dateFormat: 'dd/mm/yy' });
+                .datepicker();
         };
 
         this.select = function (selector) {

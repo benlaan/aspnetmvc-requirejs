@@ -12,9 +12,20 @@
             return $.getJSON(url, data, success, dataType);
         }
 
-        this.post = function (url, data, success, dataType) {
+        this.post = function (url, data) {
 
-            return $.post(url, data, success, dataType);
+            $.post(url, data);
+        }
+
+        this.postJson = function (url, data, success) {
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                contentType: "application/json;charset=utf-8",
+                success: success
+            });
         }
     };
 

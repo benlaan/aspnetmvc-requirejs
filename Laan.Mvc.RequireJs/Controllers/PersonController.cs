@@ -5,9 +5,14 @@ using System.Web.Mvc;
 
 namespace Laan.Mvc.RequireJs.Controllers
 {
-    public class HomeController : Controller
+    public class PersonController : Controller
     {
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Edit()
         {
             return View();
         }
