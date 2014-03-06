@@ -2,7 +2,7 @@ var version = new Date();
 
 require.config({
 
-    baseUrl: "../",
+    baseUrl: "Scripts/",
 
     urlArgs: "version=" + version,
 
@@ -31,7 +31,7 @@ require.config({
         }
 }
 });
-    
+
 // Resolve all testModules and then start the Test Runner.
 require(["qunit", "underscore"], function(qunit, _){
 
