@@ -129,6 +129,7 @@
     <Content Include="Content\app.css" />
     <Content Include="Scripts\App\Book\model.js" />
     <Content Include="Scripts\App\Person\model.js" />
+    <Content Include="Scripts\App\_Utils\binding.js" />
     <Content Include="Scripts\App\_Utils\entity.js" />
     <Content Include="Scripts\App\_Utils\string.js" />
     <Content Include="Scripts\App\_Utils\widget.js" />
@@ -218,8 +219,9 @@
     <Content Include="Scripts\Libs\moment\moment-with-langs.min.js" />
     <Content Include="Scripts\Libs\moment\moment.js" />
     <Content Include="Scripts\Libs\moment\moment.min.js" />
+    <Content Include="Scripts\Tests\Person\test-person-model.js" />
     <Content Include="Scripts\Tests\test-main.js" />
-    <Content Include="Scripts\Tests\tests.html" />
+    <Content Include="tests.html" />
     <Content Include="Scripts\Tests\_Utils\test-utils-string.js" />
     <Content Include="Scripts\Tests\_Utils\test-utils-entity-with-lists.js" />
     <Content Include="Scripts\Tests\_Utils\test-utils-entity.js" />

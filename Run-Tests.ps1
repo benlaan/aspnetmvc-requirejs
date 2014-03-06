@@ -1,1 +1,1 @@
-phantomjs.exe .\run-qunit.js .\Laan.Mvc.RequireJs\tests.html
+phantomjs.exe .\start-qunit.js .\Laan.Mvc.RequireJs\tests.html

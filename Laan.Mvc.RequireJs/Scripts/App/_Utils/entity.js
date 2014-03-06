@@ -53,13 +53,13 @@
 
             var selector = selector || ("." + fieldPartName.toLowerCase());
             var length = this.lists[fieldPartName].length;
-            var name = "{{field}}[{{index}}]".format({ field: fieldPartName, index: length + 1 });
+            var name = "{{field}}[{{index}}]".template({ field: fieldPartName, index: length + 1 });
 
             var data = _.extend(templateData, { name: name });
 
             var template = $(selector + " .template")
                 .html()
-                .format(data);
+                .template(data);
 
             var newField = $(template);
             newField.appendTo(selector);
@@ -80,7 +80,7 @@
             var index = new RegExp(/(.*)\[(\d)\]/).exec(removedName);
 
             removedElement.remove();
-            var name = "{{field}}[{{index}}]".format({ field: fieldPartName, index: index[2] });
+            var name = "{{field}}[{{index}}]".template({ field: fieldPartName, index: index[2] });
 
             list = _.filter(list, function (f) {
                 return f.attr("name") != name;
@@ -88,7 +88,7 @@
 
             _.each(list, function (e, i) {
 
-                var name = "{{field}}[{{index}}]".format({ field: fieldPartName, index: i });
+                var name = "{{field}}[{{index}}]".template({ field: fieldPartName, index: i });
                 e.attr("name", name);
             });
 
@@ -213,7 +213,7 @@
             if (selector)
                 entity.rootSelector = $(selector);
 
-            // if there is a fields property, then use it, otherwise find them 
+            // if there is a fields property, then use it, otherwise find them
             // within the root selector
             if (this.fields != undefined)
                 entity.fields = this.fields;

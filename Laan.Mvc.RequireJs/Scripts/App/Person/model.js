@@ -1,9 +1,20 @@
-﻿define(["ko-mapping", "underscore", "http"], function (mapping, _, http) {
+﻿define(["binding", "http"], function (binding, http) {
 
     // define the constructor function
-    function Person(data) {
+    function Person(json) {
 
         var self = this;
+
+        // define the properties when we are creating a new entity
+        // These will be replaced by the mapping component below..
+        this.FirstName = binding.observable();
+        this.LastName = binding.observable();
+        this.BirthDate = binding.observable();
+
+        if (json) {
+
+            binding.fromJson(this, json);
+        }
 
         this.print = function (e) {
 
@@ -12,7 +23,8 @@
 
         this.save = function () {
 
-            http.postJson("/api/Person", mapping.toJSON(self), function () {
+            http.postJson("/api/Person", binding.toJson(self), function () {
+
                 window.location = "/Person";
             });
         };
@@ -21,9 +33,6 @@
 
             window.location = "/Person";
         };
-
-        var map = mapping.fromJS(data);
-        _.extend(this, map);
     }
 
     return Person;
