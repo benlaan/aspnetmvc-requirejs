@@ -1,3 +1,6 @@
+/// <reference path="../Libs/require/require.js" />
+/// <reference path="../Libs/underscore/underscore.js" />
+
 var version = new Date();
 
 require.config({
@@ -24,19 +27,10 @@ require.config({
         "binding": "App/_Utils/binding",
         "widget": "App/_Utils/widget"
     },
-
-    shim: {
-        "underscore": {
-            exports: "_"
-        },
-        "qunit": {
-            exports: "QUnit"
-        }
-}
 });
 
 // Resolve all testModules and then start the Test Runner.
-require(["qunit", "underscore"], function(qunit, _){
+require(["qunit", "underscore"], function(qunit, _) {
 
     var tests = [
         "_Utils/test-utils-string",

@@ -53,12 +53,13 @@
 
                 var key = parseInt(token[1]);
                 if (key >= replacements.length)
-                    throw "format index " +  key +" out of range " + replacements;
+                    throw "format index {0} out of range {1}".format([key, replacements]);
 
                 var value = replacements[key];
                 result = result.replace(token[0], value);
             });
         }
+
         return result;
     }
 });

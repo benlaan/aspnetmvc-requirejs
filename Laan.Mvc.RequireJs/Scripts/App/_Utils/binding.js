@@ -7,7 +7,7 @@
             var property = element.name;
             var value = element.value;
 
-            //create the observable, if it doesn't exist 
+            // create the observable, if it doesn't exist 
             if (!ko.isWriteableObservable(data[property])) {
                 data[property] = ko.observable();
             }
@@ -48,6 +48,5 @@
 
             ko.applyBindings(entity, $selector[0]);
         }
-
     };
 });
