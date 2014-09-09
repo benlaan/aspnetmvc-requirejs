@@ -1,8 +1,6 @@
-﻿/// <reference path="../Libs/require/require.js" />
+﻿require.config({
 
-require.config({
-
-    baseUrl: "/Scripts/",
+    baseUrl: document.__scriptsFolder,
 
     urlArgs: "version=" + document.__applicationVersion,
 
@@ -17,6 +15,7 @@ require.config({
         // common libs only - don't add everything.. just the well-used libs
         "logging": "App/_Utils/logging",
         "http": "App/_Utils/http",
+        "binding": "App/_Utils/binding",
         "string": "App/_Utils/string",
         "entity": "App/_Utils/entity",
         "widget": "App/_Utils/widget"
@@ -31,6 +30,7 @@ require.config({
 
 // only used to get to configure the above urlArgs
 delete document.__applicationVersion;
+delete document.__scriptsFolder;
 
 require(["App/app", "underscore"], function (app, _) {
 

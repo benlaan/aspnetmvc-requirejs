@@ -36,14 +36,15 @@
     {
         <script type="text/javascript">
             document.__applicationVersion = '@Html.GetVersion()';
+            document.__scriptsFolder = '@Html.ScriptsFolder()';
         </script>
-        <script data-main="/Scripts/App/app-main" data-start="@startJs" src="/Scripts/Libs/Require/require.js"></script>
+        <script data-main="/@(Html.ScriptsFolder())/App/app-main" data-start="@startJs" src="/@(Html.ScriptsFolder())/Libs/Require/require.js"></script>
     }
     else
     {
         //These will be downloaded only if requireJs isn't initiated
-        <script src="/Scripts/Libs/jquery/jquery-1.7.1.min.js"></script>
-        <script src="/Scripts/Libs/knockout/knockout-3.0.0.js"></script>
+        <script src="/@(Html.ScriptsFolder())/Libs/jquery/jquery-1.7.1.min.js"></script>
+        <script src="/@(Html.ScriptsFolder())/Libs/knockout/knockout-3.0.0.js"></script>
     }
 
 </body>

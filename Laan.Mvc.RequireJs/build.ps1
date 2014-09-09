@@ -10,15 +10,41 @@ if ((Test-Path $scriptBuilt))
 
 pushd .\Scripts
 
-$configCopy = "./Scripts/bootstrapper.js"
-$optimize = if($minify.IsPresent) { "all" } else { "none" }
+$configCopy = "./Scripts/App/app-main.js"
+$optimize = if($minify.IsPresent) { "uglify" } else { "none" }
 
 $js = @"
 ({
     baseUrl: "./Scripts",
     optimize: "$optimize",
-    mainConfigFile: '$configCopy',
+    optimizeCss: "none",
+    skipDirOptimize: true,
+    removeCombined: true,
     dir: "./Scripts-Built",
+
+    paths: {
+        "jquery": "Libs/jquery/jquery-1.7.1",
+        "jquery-ui": "Libs/jquery/jquery-ui-1.8.20.min",
+        "underscore": "Libs/Underscore/underscore.min",
+        "moment": "Libs/moment/moment.min",
+        "knockout": "Libs/knockout/knockout-3.0.0",
+        "ko-mapping": "Libs/knockout/knockout.mapping",
+
+        // common libs only - don't add everything.. just the well-used libs
+        "logging": "App/_Utils/logging",
+        "http": "App/_Utils/http",
+        "binding": "App/_Utils/binding",
+        "string": "App/_Utils/string",
+        "entity": "App/_Utils/entity",
+        "widget": "App/_Utils/widget"
+    },
+
+    shim: {
+        "underscore": {
+            exports: "_"
+        }
+    },
+
     modules: [
 "@
 
@@ -35,8 +61,7 @@ ls .\App\*.js -Recurse | % {
         $js += @"
         $comma{
             name: "$name",
-            include: ["./$name"],
-            exclude: ["underscore", "jquery", "knockout"]
+            exclude: ["underscore", "jquery", "jquery-ui", "knockout", "moment"]
         }
 
 "@

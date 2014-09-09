@@ -6,3 +6,4 @@ obj
 PublishProfiles
 Scripts-Built
 phantomjs.exe
+app.build.js
