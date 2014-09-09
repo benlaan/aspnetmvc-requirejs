@@ -1,4 +1,7 @@
-﻿define(["binding", "http"], function (binding, http) {
+﻿/// <reference path="../../Libs/require/require.js" />
+/// <reference path="../_Utils/http.js" />
+
+define(["binding", "http"], function (binding, http) {
 
     // define the constructor function
     function Person(json) {

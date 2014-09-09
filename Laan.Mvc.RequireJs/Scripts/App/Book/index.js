@@ -1,4 +1,4 @@
-﻿define(["underscore", "logging", "knockout", "http"], function (_, log, ko, http) {
+﻿define(["logging"], function (log) {
 
     return new function () {
 

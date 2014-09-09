@@ -1,5 +1,4 @@
 ﻿/// <reference path="../Libs/require/require.js" />
-/// <reference path="../Libs/underscore/underscore.js" />
 
 require.config({
 
@@ -23,6 +22,11 @@ require.config({
         "widget": "App/_Utils/widget"
     },
 
+    shim: {
+        "underscore": {
+            exports: "_"
+        }
+    }
 });
 
 // only used to get to configure the above urlArgs

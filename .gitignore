@@ -5,3 +5,4 @@ obj
 *.PublishSettings
 PublishProfiles
 Scripts-Built
+phantomjs.exe

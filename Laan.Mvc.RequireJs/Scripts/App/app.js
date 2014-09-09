@@ -1,14 +1,11 @@
-﻿define(["underscore", "logging"], function (_, log) {
+﻿define(["logging"], function (log) {
 
     var App = function () { };
 
-    _.extend(App.prototype, {
+    App.prototype.init = function () {
 
-        init: function () {
-
-            log.debug("App.Init");
-        }
-    });
+        log.debug("App.Init");
+    }
 
     return new App();
 });
