@@ -19,7 +19,7 @@ namespace Laan.Mvc.RequireJs.Extensions
         public static MvcHtmlString StartJs(this HtmlHelper helper)
         {
             var controller = helper.ViewContext.RouteData.Values["Controller"].ToString();
-            var action = helper.ViewContext.RouteData.Values["Action"].ToString();
+            var action = helper.ViewContext.RouteData.Values["Action"].ToString().ToLower();
 
             var path = HttpContext.Current.Server.MapPath(String.Format(@"~\{0}\App\{1}\{2}.js", ScriptsFolder(helper), controller, action));
 

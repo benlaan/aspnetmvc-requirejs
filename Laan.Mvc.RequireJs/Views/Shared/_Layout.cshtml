@@ -37,8 +37,9 @@
         <script type="text/javascript">
             document.__applicationVersion = '@Html.GetVersion()';
             document.__scriptsFolder = '@Html.ScriptsFolder()';
+            document.__startPage = '@startJs';
         </script>
-        <script data-main="/@(Html.ScriptsFolder())/App/app-main" data-start="@startJs" src="/@(Html.ScriptsFolder())/Libs/Require/require.js"></script>
+        <script data-main="/@(Html.ScriptsFolder())/App/app-main" src="/@(Html.ScriptsFolder())/Libs/Require/require.js"></script>
     }
     else
     {
